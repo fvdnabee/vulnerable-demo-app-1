@@ -19,6 +19,11 @@ app.get("/payments", (req, res) => {
   res.status(200).send(STRIPE_API_KEY)
 });
 
+app.get('/file/:name', function (req, res, next) {
+  const fileName = req.params.name;
+  res.sendFile(fileName);
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!", err);
