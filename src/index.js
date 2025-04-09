@@ -1,3 +1,4 @@
+const path = require('path');
 import express from "express";
 
 const app = express();
@@ -19,8 +20,10 @@ app.get("/payments", (req, res) => {
   res.status(200).send(STRIPE_API_KEY)
 });
 
+const getFileName = (req) => path.join('tmp', req.params.name);
+
 app.get('/file/:name', function (req, res, next) {
-  const fileName = req.params.name;
+  const fileName = getFileName(req);
   res.sendFile(fileName);
 });
 
